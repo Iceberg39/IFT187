@@ -86,7 +86,7 @@ CREATE TABLE Question
         noQ NoQuestion NOT NULL,
         typeQ TypeQuestion NOT NULL,
         obligatoire BOOLEAN NOT NULL,
-        CONSTRAINT Question_cc0 PRIMARY KEY (noQ)
+        CONSTRAINT Question_cc0 PRIMARY KEY (idQ, noQ)
 
 );
 
@@ -96,7 +96,7 @@ CREATE TABLE ChoixQCM
         noQ NoQuestion NOT NULL,
         noChoix NoChoix NOT NULL,
         description Description NOT NULL,
-        CONSTRAINT ChoixQCM_cc0 PRIMARY KEY (noChoix)
+        CONSTRAINT ChoixQCM_cc0 PRIMARY KEY (idQ, noQ, noChoix)
 );
 
 CREATE TABLE Repondant
@@ -112,14 +112,16 @@ CREATE TABLE Formulaire
     (
         idQ IdQuestionnaire NOT NULL,
         matricule Matricule NOT NULL,
-        dateReponse DATE NOT NULL
+        dateReponse DATE NOT NULL,
+        CONSTRAINT Formulaire_cc0 PRIMARY KEY (idQ, matricule)
 );
 
 CREATE TABLE Reponse
     (
         idQ IdQuestionnaire NOT NULL,
         matricule Matricule NOT NULL,
-        noQ NoQuestion NOT NULL
+        noQ NoQuestion NOT NULL,
+        CONSTRAINT Reponse_cc0 PRIMARY KEY (idQ, matricule, noQ)
 );
 
 CREATE TABLE RCM
@@ -127,7 +129,8 @@ CREATE TABLE RCM
         noChoix NoChoix NOT NULL,
         idQ IdQuestionnaire NOT NULL,
         matricule Matricule NOT NULL,
-        noQ NoQuestion NOT NULL
+        noQ NoQuestion NOT NULL,
+        CONSTRAINT RCM_cc0 PRIMARY KEY (idQ, matricule, noQ)
 );
 
 CREATE TABLE RO
@@ -135,7 +138,8 @@ CREATE TABLE RO
         idQ IdQuestionnaire NOT NULL,
         matricule Matricule NOT NULL,
         noQ NoQuestion NOT NULL,
-        texteReponse Description NOT NULL
+        texteReponse Description NOT NULL,
+        CONSTRAINT RO_cc0 PRIMARY KEY (idQ, matricule, noQ)
 );
 --
 -- À compléter par les contributeurs
