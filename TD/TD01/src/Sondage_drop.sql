@@ -18,6 +18,19 @@ SET SCHEMA 'Sondage' ;
 
 DROP TABLE Questionnaire CASCADE ;
 
+DROP TABLE Question CASCADE ;
+
+DROP TABLE ChoixQCM CASCADE ;
+
+DROP TABLE Repondant CASCADE ;
+
+DROP TABLE Formulaire CASCADE ;
+
+DROP TABLE Reponse CASCADE ;
+
+DROP TABLE RCM CASCADE ;
+
+DROP TABLE RO CASCADE ;
 --
 -- À compléter
 --

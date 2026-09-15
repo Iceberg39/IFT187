@@ -25,9 +25,19 @@ SET SCHEMA 'Sondage' ;
 
 DELETE FROM Questionnaire ;
 
---
--- À compléter
---
+DELETE FROM Question;
+
+DELETE FROM ChoixQCM;
+
+DELETE FROM Repondant;
+
+DELETE FROM Formulaire;
+
+DELETE FROM Reponse;
+
+DELETE FROM RCM;
+
+DELETE FROM RO;
 
 /*
 ============================================================================== Z
