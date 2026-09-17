@@ -93,7 +93,8 @@ CREATE TABLE Question
         noQ NoQuestion NOT NULL,
         typeQ TypeQuestion NOT NULL,
         obligatoire BOOLEAN NOT NULL,
-        CONSTRAINT Question_cc0 PRIMARY KEY (idQ, noQ)
+        CONSTRAINT Question_cc0 PRIMARY KEY (idQ, noQ),
+        CONSTRAINT Question_cc1 FOREIGN KEY (idQ) REFERENCES Questionnaire (idQ)
 
 );
 
@@ -103,7 +104,8 @@ CREATE TABLE ChoixQCM
         noQ NoQuestion NOT NULL,
         noChoix NoChoix NOT NULL,
         description Description NOT NULL,
-        CONSTRAINT ChoixQCM_cc0 PRIMARY KEY (idQ, noQ, noChoix)
+        CONSTRAINT ChoixQCM_cc0 PRIMARY KEY (idQ, noQ, noChoix),
+        CONSTRAINT ChoixQCM_cc1 FOREIGN KEY (idQ, noQ) REFERENCES Question (idQ, noQ)
 );
 
 CREATE TABLE Repondant
@@ -112,7 +114,8 @@ CREATE TABLE Repondant
         prénom Nom NOT NULL,
         courriel Courriel NOT NULL,
         matricule Matricule NOT NULL,
-        CONSTRAINT Repondant_cc0 PRIMARY KEY (matricule)
+        CONSTRAINT Repondant_cc0 PRIMARY KEY (matricule),
+        CONSTRAINT Repondant_cc1 UNIQUE (courriel)
 );
 
 CREATE TABLE Formulaire
@@ -120,7 +123,9 @@ CREATE TABLE Formulaire
         idQ IdQuestionnaire NOT NULL,
         matricule Matricule NOT NULL,
         dateReponse DATE NOT NULL,
-        CONSTRAINT Formulaire_cc0 PRIMARY KEY (idQ, matricule)
+        CONSTRAINT Formulaire_cc0 PRIMARY KEY (idQ, matricule),
+        CONSTRAINT Formulaire_cc1 FOREIGN KEY (idQ) REFERENCES Questionnaire (idQ),
+        CONSTRAINT Formulaire_cc2 FOREIGN KEY (matricule) REFERENCES Repondant (matricule)
 );
 
 CREATE TABLE Reponse
@@ -128,7 +133,9 @@ CREATE TABLE Reponse
         idQ IdQuestionnaire NOT NULL,
         matricule Matricule NOT NULL,
         noQ NoQuestion NOT NULL,
-        CONSTRAINT Reponse_cc0 PRIMARY KEY (idQ, matricule, noQ)
+        CONSTRAINT Reponse_cc0 PRIMARY KEY (idQ, matricule, noQ),
+        CONSTRAINT Reponse_cc1 FOREIGN KEY (idQ, matricule) REFERENCES Formulaire (idQ, matricule),
+        CONSTRAINT Reponse_cc2 FOREIGN KEY (idQ, noQ) REFERENCES Question (idQ, noQ)
 );
 
 CREATE TABLE RCM
@@ -137,7 +144,9 @@ CREATE TABLE RCM
         idQ IdQuestionnaire NOT NULL,
         matricule Matricule NOT NULL,
         noQ NoQuestion NOT NULL,
-        CONSTRAINT RCM_cc0 PRIMARY KEY (idQ, matricule, noQ)
+        CONSTRAINT RCM_cc0 PRIMARY KEY (idQ, matricule, noQ),
+        CONSTRAINT RCM_cc1 FOREIGN KEY (idQ, matricule, noQ) REFERENCES Reponse (idQ, matricule, noQ),
+        CONSTRAINT RCM_cc2 FOREIGN KEY (idQ, noQ, noChoix) REFERENCES ChoixQCM (idQ, noQ, noChoix)
 );
 
 CREATE TABLE RO
@@ -146,7 +155,8 @@ CREATE TABLE RO
         matricule Matricule NOT NULL,
         noQ NoQuestion NOT NULL,
         texteReponse Description NOT NULL,
-        CONSTRAINT RO_cc0 PRIMARY KEY (idQ, matricule, noQ)
+        CONSTRAINT RO_cc0 PRIMARY KEY (idQ, matricule, noQ),
+        CONSTRAINT RO_cc1 FOREIGN KEY (idQ, matricule, noQ) REFERENCES Reponse (idQ, matricule, noQ)
 );
 --
 -- À compléter par les contributeurs
