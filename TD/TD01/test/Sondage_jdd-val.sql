@@ -40,7 +40,19 @@ INSERT INTO Questionnaire(idQ, titre, auteur, dateDebut, dateFin) VALUES
 --
 -- À compléter
 --
+INSERT INTO question(idq, noq, typeq, obligatoire) VALUES ('Q000001', 1, 'QCM', TRUE);
 
+INSERT INTO choixqcm(idq, noq, nochoix, description) VALUES ('Q000001', 1, 3, 'Question 1');
+
+INSERT INTO repondant(nom, prénom, courriel, matricule) VALUES ('Moi', 'Toi', 'moitoi@toi.moi', 12345678);
+
+INSERT INTO formulaire(idq, matricule, datereponse) VALUES ('Q000001', 12345678, '2026-09-17');
+
+INSERT INTO reponse(idq, matricule, noq) VALUES ('Q000001', 12345678, 1);
+
+INSERT INTO rcm(nochoix, idq, matricule, noq) VALUES (3, 'Q000001', 12345678, 1);
+
+INSERT INTO ro(idq, matricule, noq, textereponse) VALUES ('Q000001', 12345678, 1, 'GG')
 /*
 ============================================================================== Z
 .Contributeurs :
