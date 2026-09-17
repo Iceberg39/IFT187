@@ -45,7 +45,26 @@ INSERT INTO Questionnaire(idQ, titre, auteur, dateDebut, dateFin) VALUES
 --
 -- À compléter
 --
+-- noq pas correct
+INSERT INTO Question(idq, noq, typeq, obligatoire) VALUES ('Q000001', 2, 'RAB', FALSE);
 
+-- nochoix pas correct
+INSERT INTO choixqcm(idq, noq, nochoix, description) VALUES ('Q000001', 1, 1200, 'Bla');
+
+-- nom pas correct
+INSERT INTO repondant(nom, prénom, courriel, matricule) VALUES ('', 'Vide', 'mr.vide@empty.com', 00000000);
+
+-- Matricule pas correct
+INSERT INTO formulaire(idq, matricule, datereponse) VALUES ('Q000001', 123, DATE(01-01-01));
+
+-- noq pas correct
+INSERT INTO reponse(idq, matricule, noq) VALUES ('Q000001', 12345678, -40);
+
+-- noq pas correct
+INSERT INTO rcm(nochoix, idq, matricule, noq) VALUES (2, 'Q000001', 87654321, 40000);
+
+-- textereponse pas correct
+INSERT INTO ro(idq, matricule, noq, textereponse) VALUES ('Q000001', 12312312, 3, 45)
 /*
 ============================================================================== Z
 .Contributeurs :
