@@ -24,7 +24,8 @@ CREATE DOMAIN IdQuestionnaire
 Trypon Tournesol a décider le numération qu'il entendait donner à ses questionnaires.
 */
   CHAR(7)
-  CHECK (VALUE SIMILAR TO 'Q[0-9]{6}') ;
+  CONSTRAINT IdQuestionnaire_inv
+        Check (VALUE SIMILAR TO 'Q[0-9]{6}') ;
 
 CREATE DOMAIN Courriel
 
@@ -36,27 +37,33 @@ CREATE DOMAIN Courriel
 
 CREATE DOMAIN Matricule
     CHAR(8)
-    CHECK ( VALUE SIMILAR TO '[0-9]{8}');
+    CONSTRAINT Matricule_inv
+        CHECK ( VALUE SIMILAR TO '[0-9]{8}');
 
 CREATE DOMAIN NoChoix
     SMALLINT
-    CHECK ( VALUE >= 0 AND VALUE < 1000);
+    CONSTRAINT NoChoix_inv
+        CHECK ( VALUE >= 0 AND VALUE < 1000);
 
 CREATE DOMAIN Nom
     VARCHAR(64)
-    CHECK ( VALUE != '');
+    CONSTRAINT Nom_inv
+        CHECK ( VALUE != '');
 
 CREATE DOMAIN NoQuestion
     SMALLINT
-    CHECK ( VALUE >= 0 AND VALUE < 10000);
+    CONSTRAINT NoQuestion_inv
+        CHECK ( VALUE >= 0 AND VALUE < 10000);
 
 CREATE DOMAIN Titre
     VARCHAR(80)
-    CHECK ( VALUE != '');
+    CONSTRAINT Titre_inv
+        CHECK ( VALUE != '');
 
 CREATE DOMAIN TypeQuestion
     VARCHAR(4)
-    CHECK ( VALUE = 'QCM' OR VALUE = 'QO' OR VALUE = 'QCMO');
+    CONSTRAINT TypeQuestion_inv
+        CHECK ( VALUE = 'QCM' OR VALUE = 'QO' OR VALUE = 'QCMO');
 
 CREATE DOMAIN Description
     VARCHAR(250);
