@@ -55,7 +55,7 @@ INSERT INTO choixqcm(idq, noq, nochoix, description) VALUES ('Q000001', 1, 1200,
 INSERT INTO repondant(nom, prénom, courriel, matricule) VALUES ('', 'Vide', 'mr.vide@empty.com', 00000000);
 
 -- Matricule pas correct
-INSERT INTO formulaire(idq, matricule, datereponse) VALUES ('Q000001', 123, DATE(01-01-01));
+INSERT INTO formulaire(idq, matricule, datereponse) VALUES ('Q000001', 123, cast('01/01/01' as DATE) );
 
 -- noq pas correct
 INSERT INTO reponse(idq, matricule, noq) VALUES ('Q000001', 12345678, -40);
