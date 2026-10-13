@@ -32,11 +32,16 @@ ALTER COLUMN datefin TYPE EstampilleM;
 ALTER TABLE questionnaire
 RENAME COLUMN datefin TO fermeture;
 
-ALTER TABLE formulaire
+ALTER TABLE reponse
 ADD COLUMN saisie EstampilleM;
 
-UPDATE formulaire
-SET saisie = to_timestamp(extract(EPOCH FROM datereponse) + 43200)
+WITH dateReponse AS (
+    SELECT datereponse
+    FROM reponse
+    JOIN formulaire USING (idq, matricule)
+)
+UPDATE reponse
+SET saisie = to_timestamp(extract(EPOCH FROM dateReponse.datereponse) + 43200)
 WHERE saisie IS NULL;
 
 ALTER TABLE formulaire

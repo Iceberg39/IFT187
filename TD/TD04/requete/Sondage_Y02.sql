@@ -23,4 +23,21 @@ Retourner vrai si et seulement si la réponse respecte les règles suivantes :
 - saisie comprise entre ouverture et fermeture.
 ============================================================================== B
 */
+DROP FUNCTION Choix_nb(val_idq idquestionnaire, val_noq noquestion);
+CREATE OR REPLACE FUNCTION Choix_nb (val_idq idquestionnaire, val_noq noquestion)
+    RETURNs INTEGER
+    LANGUAGE sql AS
+    $$
+    SELECT count(nochoix) AS nombreChoix
+    FROM choixqcm
+    WHERE idq = val_idq AND noq = val_noq
+    $$;
 
+SELECT * FROM Choix_nb('Q000001'::idquestionnaire, 5::noquestion);
+
+CREATE OR REPLACE FUNCTION Choix_corrects (val_idq idquestionnaire, val_noq noquestion)
+    RETURNS BOOLEAN
+    LANGUAGE sql AS
+    $$
+    SELECT CASE
+    $$
