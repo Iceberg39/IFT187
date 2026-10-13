@@ -20,3 +20,24 @@
    à la réponse.
 ============================================================================== B
 */
+CREATE DOMAIN EstampilleM AS
+    TIMESTAMP WITHOUT TIME ZONE;
+
+ALTER TABLE questionnaire
+ALTER COLUMN datedebut TYPE EstampilleM;
+ALTER TABLE questionnaire
+RENAME COLUMN datedebut TO ouverture;
+ALTER TABLE questionnaire
+ALTER COLUMN datefin TYPE EstampilleM;
+ALTER TABLE questionnaire
+RENAME COLUMN datefin TO fermeture;
+
+ALTER TABLE formulaire
+ADD COLUMN saisie EstampilleM;
+
+UPDATE formulaire
+SET saisie = to_timestamp(extract(EPOCH FROM datereponse) + 43200)
+WHERE saisie IS NULL;
+
+ALTER TABLE formulaire
+DROP COLUMN datereponse CASCADE;
